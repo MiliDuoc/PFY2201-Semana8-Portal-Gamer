@@ -1,135 +1,177 @@
-# Portal Gamer - Sumativa Semana 6
+# Portal Gamer - Formativa Semana 7
 
-Proyecto desarrollado para la asignatura Desarrollo Frontend I (PFY2201).
+Proyecto desarrollado para la asignatura **Desarrollo Frontend I (PFY2201)**.
 
 ## Objetivo
 
-Optimizar la lógica y funcionalidad del sitio web Portal Gamer mediante Bootstrap 5 y JavaScript, incorporando carga dinámica de productos, manipulación del DOM, eventos de usuario, búsqueda, carrito de compras y manejo de errores con Fetch API.
+Continuar el desarrollo del eCommerce Portal Gamer utilizando React, incorporando componentes funcionales, manejo de estado con Hooks, eventos de usuario, renderizado condicional y un carrito de compras interactivo.
 
 ## Tecnologías utilizadas
 
-- HTML5
-- CSS3
-- Bootstrap 5.3.8
+- React
+- Vite
 - JavaScript
-- DOM
-- Fetch API
-- JSON
+- JSX
+- CSS3
+- React Hooks (`useState`)
 - Git y GitHub
 - GitHub Pages
 
 ## Funcionalidades implementadas
 
-### Catálogo dinámico de productos
+### Catálogo de productos
 
-Los productos se cargan desde el archivo local `productos.json` utilizando Fetch API.
+El sitio presenta un catálogo de videojuegos mediante componentes de React.
 
-JavaScript genera dinámicamente las tarjetas de cada videojuego, incluyendo:
+Cada producto muestra:
 
 - Imagen
 - Nombre
 - Descripción
-- Precio
-- Botón para agregar al carro
+- Precio normal
+- Precio de oferta
+- Botón para agregar al carrito
 
-### Barra de navegación
+Los datos de los productos se encuentran organizados en `src/data/productos.js`.
 
-La barra de navegación fue desarrollada con Bootstrap 5 y se adapta a dispositivos móviles.
+### Componentes React
 
-Incluye las categorías:
+La aplicación fue organizada utilizando componentes funcionales reutilizables:
 
-- Acción
-- Aventura
+- `App.jsx`: componente principal y manejo general del estado.
+- `ListaProductos.jsx`: genera el listado de videojuegos.
+- `ProductoCard.jsx`: representa individualmente cada producto.
+- `Carrito.jsx`: muestra y administra el resumen del carrito.
 
-Al seleccionar una categoría, JavaScript filtra dinámicamente los productos correspondientes.
+Esta estructura permite mantener el código organizado, modular y reutilizable.
 
-### Buscador de productos
+## Manejo de estado con useState
 
-Se implementó un formulario de búsqueda utilizando el evento `submit`.
+Se utiliza el Hook `useState` para controlar:
 
-Permite buscar videojuegos por nombre o categoría y muestra un mensaje cuando no existen resultados.
+- Los productos agregados al carrito.
+- El texto ingresado en el buscador.
 
-### Carro de compras
+Cuando un usuario agrega varias veces el mismo videojuego, se actualiza su cantidad sin duplicar innecesariamente el producto dentro del resumen del carrito.
 
-Mediante el evento `click`, el usuario puede agregar videojuegos al carro.
+## Carrito de compras
 
-El resumen del carro se actualiza dinámicamente mostrando:
+El carrito permite:
 
-- Productos agregados
-- Cantidad de productos
-- Precio de cada producto
-- Total de la compra
+- Agregar productos.
+- Aumentar la cantidad de un producto cuando se agrega nuevamente.
+- Eliminar productos.
+- Mostrar la cantidad de cada videojuego.
+- Calcular el subtotal de cada producto.
+- Mostrar la cantidad total de unidades agregadas.
+- Calcular automáticamente el total de la compra.
 
-### Manipulación del DOM
+## Buscador de videojuegos
 
-JavaScript crea y actualiza elementos dinámicamente mediante métodos como:
+El buscador utiliza el evento `onChange` para actualizar el estado mientras el usuario escribe.
 
-- `getElementById()`
-- `querySelectorAll()`
-- `createElement()`
-- `appendChild()`
-- `textContent`
-- `classList`
+Los productos se filtran dinámicamente según el nombre ingresado.
 
-### Fetch API y manejo de errores
+Si no existen coincidencias, se muestra el mensaje:
 
-Fetch API obtiene los productos desde `productos.json`.
+> No se encontraron videojuegos.
 
-Se implementaron validaciones para comprobar la respuesta y el formato de los datos recibidos.
+## Eventos
 
-En caso de error, el sitio muestra un mensaje amigable al usuario.
+La aplicación utiliza eventos de React para generar interacción con el usuario.
 
-Además, la sección Novedades Gamer carga contenido dinámicamente desde `data/novedades.json`.
+Entre ellos:
+
+- `onClick` para agregar productos al carrito.
+- `onClick` para eliminar productos del carrito.
+- `onChange` para realizar búsquedas.
+
+## Renderizado condicional
+
+Se implementó renderizado condicional para mostrar distintos contenidos según el estado de la aplicación.
+
+Ejemplos:
+
+- Mensaje cuando el carrito está vacío.
+- Listado y total cuando existen productos en el carrito.
+- Mensaje cuando una búsqueda no encuentra videojuegos.
 
 ## Diseño responsivo
 
-El sitio utiliza Bootstrap 5 y CSS para adaptarse a distintos tamaños de pantalla.
+La interfaz se adapta a diferentes tamaños de pantalla mediante CSS y Media Queries.
 
-La cuadrícula de productos utiliza:
+El catálogo presenta:
 
-- `col-12` en dispositivos móviles
-- `col-md-6` en tablets
-- `col-lg-4` en escritorio
+- Tres columnas en pantallas grandes.
+- Dos columnas en pantallas medianas.
+- Una columna en dispositivos móviles.
 
-La barra de navegación utiliza el componente Navbar de Bootstrap y se transforma en un menú desplegable en pantallas pequeñas.
-
-## Pruebas realizadas
-
-Se verificó el funcionamiento de:
-
-- Carga dinámica de productos mediante Fetch API
-- Filtrado por categorías
-- Búsqueda de videojuegos
-- Evento `click` del carro
-- Actualización dinámica del resumen del carro
-- Evento `submit`
-- Manejo de búsquedas sin resultados
-- Manejo de errores de carga
-- Navegación responsiva
-- Carrusel automático
-- Sección Novedades Gamer
-
-## Estructura principal
+## Estructura principal del proyecto
 
 ```text
-index.html
-productos.json
-assets/
-├── css/
-│   └── styles.css
-├── img/
-└── js/
-    └── script.js
-data/
-└── novedades.json
+semana7-react/
+├── public/
+│   └── img/
+├── src/
+│   ├── components/
+│   │   ├── Carrito.jsx
+│   │   ├── ListaProductos.jsx
+│   │   └── ProductoCard.jsx
+│   ├── data/
+│   │   └── productos.js
+│   ├── App.css
+│   ├── App.jsx
+│   ├── index.css
+│   └── main.jsx
+├── index.html
+├── package.json
+└── vite.config.js
 ```
+
+## Ejecución local
+
+Para ejecutar el proyecto:
+
+```bash
+cd semana7-react
+npm install
+npm run dev
+```
+
+Para generar la versión de producción:
+
+```bash
+npm run build
+```
+
+## Despliegue
+
+El proyecto utiliza `gh-pages` para generar y publicar la versión de producción de React en la rama `gh-pages`.
+
+## Evidencias de funcionamiento
+
+### Catálogo de productos
+
+![Catálogo de productos](capturas/semana7/01-catalogo-react.png)
+
+### Carrito de compras
+
+![Carrito de compras](capturas/semana7/02-carrito-react.png)
+
+### Búsqueda sin resultados
+
+![Búsqueda sin resultados](capturas/semana7/03-busqueda-sin-resultados.png)
+
+### Diseño responsive
+
+![Diseño responsive](capturas/semana7/04-responsive-movil.png)
 
 ## Sitio publicado
 
 Repositorio GitHub:
 
-https://github.com/MiliDuoc/PFY2201-Semana6-Portal-Gamer
+https://github.com/MiliDuoc/PFY2201-Semana7-Portal-Gamer
 
 GitHub Pages:
 
-https://miliduoc.github.io/PFY2201-Semana6-Portal-Gamer/
+https://miliduoc.github.io/PFY2201-Semana7-Portal-Gamer/
