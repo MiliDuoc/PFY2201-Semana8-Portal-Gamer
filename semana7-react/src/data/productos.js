@@ -5,7 +5,7 @@ const productos = [
     precioNormal: 34990,
     precioOferta: 29990,
     descripcion: "Construye, explora y vive aventuras en un mundo lleno de posibilidades.",
-    imagen: "/img/minecraft.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/minecraft.jpg`,
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ const productos = [
     precioNormal: 69990,
     precioOferta: 59990,
     descripcion: "Disfruta la emoción del fútbol con equipos, jugadores y competiciones.",
-    imagen: "/img/fc26.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/fc26.jpg`,
   },
   {
     id: 3,
@@ -21,7 +21,7 @@ const productos = [
     precioNormal: 59990,
     precioOferta: 49990,
     descripcion: "Compite en entretenidas carreras con tus personajes favoritos.",
-    imagen: "/img/mariokart.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/mariokart.jpg`,
   },
   {
     id: 4,
@@ -29,7 +29,7 @@ const productos = [
     precioNormal: 64990,
     precioOferta: 54990,
     descripcion: "Explora Hyrule y descubre una nueva aventura llena de desafíos.",
-    imagen: "/img/zelda.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/zelda.jpg`,
   },
   {
     id: 5,
@@ -37,7 +37,7 @@ const productos = [
     precioNormal: 74990,
     precioOferta: 64990,
     descripcion: "Recorre Nueva York y enfréntate a nuevos enemigos como Spider-Man.",
-    imagen: "/img/spiderman2.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/spiderman2.jpg`,
   },
   {
     id: 6,
@@ -45,7 +45,7 @@ const productos = [
     precioNormal: 79990,
     precioOferta: 69990,
     descripcion: "Acompaña a Kratos y Atreus en una épica aventura por los nueve reinos.",
-    imagen: "/img/godofwar.jpg",
+    imagen: `${import.meta.env.BASE_URL}img/godofwar.jpg`,
   },
 ]
 
