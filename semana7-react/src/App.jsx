@@ -1,12 +1,24 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import ListaProductos from "./components/ListaProductos"
 import Carrito from "./components/Carrito"
 import productos from "./data/productos"
 import "./App.css"
 
 function App() {
-  // Estado que almacena los productos agregados al carrito.
-  const [carrito, setCarrito] = useState([])
+  // Recupera el carrito guardado en localStorage al iniciar la aplicación.
+  const [carrito, setCarrito] = useState(() => {
+    try {
+      const carritoGuardado = localStorage.getItem("carrito")
+      return carritoGuardado ? JSON.parse(carritoGuardado) : []
+    } catch {
+      return []
+    }
+  })
+
+  // Guarda automáticamente el carrito cada vez que cambia.
+  useEffect(() => {
+    localStorage.setItem("carrito", JSON.stringify(carrito))
+  }, [carrito])
 
   // Estado que almacena el texto escrito en el buscador.
   const [busqueda, setBusqueda] = useState("")
