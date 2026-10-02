@@ -1,5 +1,5 @@
 {
-  "name": "semana7-react",
+  "name": "semana8-react",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +9,7 @@
     "lint": "oxlint",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist -r https://github.com/MiliDuoc/PFY2201-Semana7-Portal-Gamer.git"
+    "deploy": "gh-pages -d dist -r https://github.com/MiliDuoc/PFY2201-Semana8-Portal-Gamer.git"
   },
   "dependencies": {
     "react": "^19.2.8",

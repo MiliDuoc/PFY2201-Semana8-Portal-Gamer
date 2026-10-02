@@ -1,8 +1,12 @@
-function ProductoCard({ producto, agregarAlCarrito }) {
+function ProductoCard({
+  producto,
+  agregarAlCarrito,
+  estaEnCarrito
+}) {
   return (
     <div className="producto-card">
       <img
-        src={producto.imagen}
+        src={`${import.meta.env.BASE_URL}${producto.imagen}`}
         alt={producto.nombre}
         className="producto-imagen"
       />
@@ -15,18 +19,26 @@ function ProductoCard({ producto, agregarAlCarrito }) {
         </p>
 
         <p className="precio-normal">
-          Precio normal: ${producto.precioNormal.toLocaleString("es-CL")}
+          Precio normal: $
+          {producto.precioNormal.toLocaleString("es-CL")}
         </p>
 
         <p className="precio-oferta">
-          Oferta: ${producto.precioOferta.toLocaleString("es-CL")}
+          Oferta: $
+          {producto.precioOferta.toLocaleString("es-CL")}
         </p>
 
         <button
-          className="btn-agregar"
+          className={
+            estaEnCarrito
+              ? "btn-agregar btn-en-carrito"
+              : "btn-agregar"
+          }
           onClick={() => agregarAlCarrito(producto)}
         >
-          Agregar al carrito
+          {estaEnCarrito
+            ? "En el carrito ✓"
+            : "Agregar al carrito"}
         </button>
       </div>
     </div>

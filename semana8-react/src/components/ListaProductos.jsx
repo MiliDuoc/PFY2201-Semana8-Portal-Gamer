@@ -1,6 +1,10 @@
 import ProductoCard from "./ProductoCard"
 
-function ListaProductos({ productos, agregarAlCarrito }) {
+function ListaProductos({
+  productos,
+  agregarAlCarrito,
+  carrito
+}) {
   return (
     <section className="productos">
       <h2>Nuestros videojuegos</h2>
@@ -11,6 +15,9 @@ function ListaProductos({ productos, agregarAlCarrito }) {
             key={producto.id}
             producto={producto}
             agregarAlCarrito={agregarAlCarrito}
+            estaEnCarrito={carrito.some(
+              (item) => item.id === producto.id
+            )}
           />
         ))}
       </div>

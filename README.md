@@ -1,10 +1,22 @@
-# Portal Gamer - Formativa Semana 7
+# Portal Gamer - Semana 8
 
 Proyecto desarrollado para la asignatura **Desarrollo Frontend I (PFY2201)**.
 
+## Actividad
+
+**Semana 8 - Evaluación Sumativa**
+
+**Mejorando funcionalidades clave en el eCommerce con React**
+
+El proyecto continúa el eCommerce desarrollado durante las semanas anteriores y aplica mejoras relacionadas con gestión de estados, efectos secundarios, renderizado condicional y experiencia de usuario.
+
+---
+
 ## Objetivo
 
-Continuar el desarrollo del eCommerce Portal Gamer utilizando React, incorporando componentes funcionales, manejo de estado con Hooks, eventos de usuario, renderizado condicional y un carrito de compras interactivo.
+Optimizar la aplicación Portal Gamer utilizando componentes funcionales de React, Hooks como `useState` y `useEffect`, carga dinámica de información y renderizado condicional.
+
+---
 
 ## Tecnologías utilizadas
 
@@ -13,17 +25,30 @@ Continuar el desarrollo del eCommerce Portal Gamer utilizando React, incorporand
 - JavaScript
 - JSX
 - CSS3
-- React Hooks (`useState`)
-- Git y GitHub
+- React Hooks:
+  - `useState`
+  - `useEffect`
+- Fetch API
+- Web Storage API (`localStorage`)
+- Git
+- GitHub
 - GitHub Pages
+
+---
 
 ## Funcionalidades implementadas
 
-### Catálogo de productos
+### Catálogo de videojuegos
 
-El sitio presenta un catálogo de videojuegos mediante componentes de React.
+Los productos se cargan dinámicamente desde el archivo:
 
-Cada producto muestra:
+```text
+public/productos.json
+```
+
+La aplicación utiliza `fetch` dentro de `useEffect` para obtener la información y actualizar el estado del catálogo.
+
+Cada videojuego contiene:
 
 - Imagen
 - Nombre
@@ -32,146 +57,243 @@ Cada producto muestra:
 - Precio de oferta
 - Botón para agregar al carrito
 
-Los datos de los productos se encuentran organizados en `src/data/productos.js`.
+---
 
-### Componentes React
+## Gestión de estados con `useState`
 
-La aplicación fue organizada utilizando componentes funcionales reutilizables:
+Se utiliza `useState` para gestionar distintos elementos interactivos de la aplicación:
 
-- `App.jsx`: componente principal y manejo general del estado.
-- `ListaProductos.jsx`: genera el listado de videojuegos.
-- `ProductoCard.jsx`: representa individualmente cada producto.
-- `Carrito.jsx`: muestra y administra el resumen del carrito.
+- Lista de productos.
+- Carrito de compras.
+- Buscador.
+- Estado de carga.
+- Estado de error.
+- Mensajes de notificación.
 
-Esta estructura permite mantener el código organizado, modular y reutilizable.
+---
 
-## Manejo de estado con useState
+## Manejo de efectos con `useEffect`
 
-Se utiliza el Hook `useState` para controlar:
+La aplicación utiliza `useEffect` para:
 
-- Los productos agregados al carrito.
-- El texto ingresado en el buscador.
+- Cargar dinámicamente los productos desde un archivo JSON.
+- Guardar automáticamente el carrito en `localStorage`.
+- Ocultar automáticamente las notificaciones después de unos segundos.
 
-Cuando un usuario agrega varias veces el mismo videojuego, se actualiza su cantidad sin duplicar innecesariamente el producto dentro del resumen del carrito.
+---
 
 ## Carrito de compras
 
 El carrito permite:
 
 - Agregar productos.
-- Aumentar la cantidad de un producto cuando se agrega nuevamente.
+- Incrementar la cantidad cuando se agrega nuevamente un mismo producto.
 - Eliminar productos.
-- Mostrar la cantidad de cada videojuego.
-- Calcular el subtotal de cada producto.
-- Mostrar la cantidad total de unidades agregadas.
-- Calcular automáticamente el total de la compra.
+- Solicitar confirmación antes de eliminar.
+- Calcular subtotales.
+- Calcular la cantidad total de productos.
+- Calcular el total monetario del carrito.
+- Conservar los productos después de recargar la página mediante `localStorage`.
 
-## Buscador de videojuegos
-
-El buscador utiliza el evento `onChange` para actualizar el estado mientras el usuario escribe.
-
-Los productos se filtran dinámicamente según el nombre ingresado.
-
-Si no existen coincidencias, se muestra el mensaje:
-
-> No se encontraron videojuegos.
-
-## Eventos
-
-La aplicación utiliza eventos de React para generar interacción con el usuario.
-
-Entre ellos:
-
-- `onClick` para agregar productos al carrito.
-- `onClick` para eliminar productos del carrito.
-- `onChange` para realizar búsquedas.
+---
 
 ## Renderizado condicional
 
-Se implementó renderizado condicional para mostrar distintos contenidos según el estado de la aplicación.
+La aplicación utiliza renderizado condicional para mostrar diferentes elementos según el estado.
 
-Ejemplos:
+### Producto agregado
 
-- Mensaje cuando el carrito está vacío.
-- Listado y total cuando existen productos en el carrito.
-- Mensaje cuando una búsqueda no encuentra videojuegos.
+Cuando un videojuego se encuentra en el carrito, el botón cambia de:
 
-## Diseño responsivo
+```text
+Agregar al carrito
+```
 
-La interfaz se adapta a diferentes tamaños de pantalla mediante CSS y Media Queries.
+a:
 
-El catálogo presenta:
+```text
+En el carrito ✓
+```
 
-- Tres columnas en pantallas grandes.
-- Dos columnas en pantallas medianas.
-- Una columna en dispositivos móviles.
+Además, cambia visualmente de color.
+
+### Carrito vacío
+
+Cuando no existen productos seleccionados se muestra:
+
+```text
+Tu carrito está vacío.
+```
+
+### Búsqueda sin resultados
+
+Cuando la búsqueda no encuentra coincidencias se muestra:
+
+```text
+No se encontraron videojuegos.
+```
+
+### Estado de carga
+
+Mientras se obtienen los productos se muestra:
+
+```text
+Cargando videojuegos...
+```
+
+### Estado de error
+
+Si ocurre un problema al cargar los productos se muestra:
+
+```text
+No fue posible cargar los videojuegos. Intenta nuevamente.
+```
+
+También se incorpora un botón **Reintentar**, que permite volver a solicitar los datos sin recargar manualmente la página.
+
+---
+
+## Notificaciones y experiencia de usuario
+
+Se incorporaron mejoras a partir de la retroalimentación de la Semana 7.
+
+### Notificación al agregar
+
+Al agregar un videojuego aparece una notificación visual temporal indicando que el producto fue agregado correctamente.
+
+### Confirmación de eliminación
+
+Antes de eliminar un producto se solicita confirmación para evitar eliminaciones accidentales.
+
+Después de eliminarlo también aparece una notificación informando la acción realizada.
+
+---
+
+## Buscador
+
+El buscador utiliza el evento `onChange` para actualizar el estado en tiempo real y filtrar los videojuegos por nombre.
+
+---
+
+## Componentes
+
+La aplicación mantiene una estructura modular mediante componentes funcionales.
+
+```text
+src/
+├── components/
+│   ├── Carrito.jsx
+│   ├── ListaProductos.jsx
+│   └── ProductoCard.jsx
+├── App.css
+├── App.jsx
+├── index.css
+└── main.jsx
+```
+
+Los datos dinámicos se encuentran en:
+
+```text
+public/
+├── img/
+└── productos.json
+```
+
+---
 
 ## Estructura principal del proyecto
 
 ```text
-semana7-react/
-├── public/
-│   └── img/
-├── src/
-│   ├── components/
-│   │   ├── Carrito.jsx
-│   │   ├── ListaProductos.jsx
-│   │   └── ProductoCard.jsx
-│   ├── data/
-│   │   └── productos.js
-│   ├── App.css
-│   ├── App.jsx
-│   ├── index.css
-│   └── main.jsx
-├── index.html
-├── package.json
-└── vite.config.js
+tienda-videojuegos/
+├── capturas/
+│   └── semana8/
+├── semana8-react/
+│   ├── public/
+│   ├── src/
+│   ├── package.json
+│   ├── package-lock.json
+│   └── vite.config.js
+└── README.md
 ```
+
+---
 
 ## Ejecución local
 
-Para ejecutar el proyecto:
+Entrar al proyecto React:
 
 ```bash
-cd semana7-react
+cd semana8-react
+```
+
+Instalar dependencias:
+
+```bash
 npm install
+```
+
+Ejecutar el servidor de desarrollo:
+
+```bash
 npm run dev
 ```
 
-Para generar la versión de producción:
+---
+
+## Validación del código
+
+El proyecto fue comprobado utilizando:
+
+```bash
+npm run lint
+```
+
+Resultado:
+
+```text
+Found 0 warnings and 0 errors.
+```
+
+También se comprobó la compilación de producción mediante:
 
 ```bash
 npm run build
 ```
 
-## Despliegue
+---
 
-El proyecto utiliza `gh-pages` para generar y publicar la versión de producción de React en la rama `gh-pages`.
+## Evidencias
 
-## Evidencias de funcionamiento
+### 1. Catálogo cargado dinámicamente
 
-### Catálogo de productos
+![Catálogo dinámico](capturas/semana8/01-catalogo-dinamico.png)
 
-![Catálogo de productos](capturas/semana7/01-catalogo-react.png)
+### 2. Carrito y notificación visual
 
-### Carrito de compras
+![Carrito y notificación](capturas/semana8/02-carrito-notificacion.png)
 
-![Carrito de compras](capturas/semana7/02-carrito-react.png)
+### 3. Renderizado condicional
 
-### Búsqueda sin resultados
+![Renderizado condicional](capturas/semana8/03-renderizado-condicional.png)
 
-![Búsqueda sin resultados](capturas/semana7/03-busqueda-sin-resultados.png)
+### 4. Estado de error y reintento
 
-### Diseño responsive
+![Estado de error](capturas/semana8/04-estado-error-reintentar.png)
 
-![Diseño responsive](capturas/semana7/04-responsive-movil.png)
+---
 
-## Sitio publicado
+## Repositorio GitHub
 
-Repositorio GitHub:
+https://github.com/MiliDuoc/PFY2201-Semana8-Portal-Gamer
 
-https://github.com/MiliDuoc/PFY2201-Semana7-Portal-Gamer
+## GitHub Pages
 
-GitHub Pages:
+https://miliduoc.github.io/PFY2201-Semana8-Portal-Gamer/
 
-https://miliduoc.github.io/PFY2201-Semana7-Portal-Gamer/
+---
+
+## Asignatura
+
+**Desarrollo Frontend I - PFY2201**
+
+**Semana 8 - Evaluación Sumativa**
